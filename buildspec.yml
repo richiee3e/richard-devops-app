@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Pushing image
       - docker push 490157056549.dkr.ecr.us-east-1.amazonaws.com/richard-devops-app:latest
-      - printf '[{"name":"richard-devops-2026-container-1 ","imageUri":"%s"}]' 490157056549.dkr.ecr.us-east-1.amazonaws.com/richard-devops-app:latest > imagedefinitions.json
+      - printf '[{"name":"richard-devops-2026-container-1","imageUri":"%s"}]' 490157056549.dkr.ecr.us-east-1.amazonaws.com/richard-devops-app:latest > imagedefinitions.json
 
 artifacts:
   files:
