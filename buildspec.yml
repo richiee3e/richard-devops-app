@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 490157056549.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
+      - echo Build started
+      - docker build -t richard-devops-app .
+      - docker tag richard-devops-app:latest 490157056549.dkr.ecr.us-east-1.amazonaws.com/richard-devops-app:latest
+  post_build:
+    commands:
+      - echo Pushing image
+      - docker push 490157056549.dkr.ecr.us-east-1.amazonaws.com/richard-devops-app:latest
+      - printf '[{"name":"richard-devops-2026-container-1 ","imageUri":"%s"}]' 490157056549.dkr.ecr.us-east-1.amazonaws.com/richard-devops-app:latest > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
